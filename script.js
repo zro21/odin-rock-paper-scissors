@@ -1,30 +1,59 @@
-
-let random = Math.floor(Math.random() * 3 + 1);
 function computerPlay() {
+  let random = Math.floor(Math.random() * 3 + 1);
   if (random == 1) {
-      return 'Rock';
+      return 'rock';
     } else if (random == 2) {
-      return 'Paper';
+      return 'paper';
     } else {
-      return 'Scissors';
+      return 'scissors';
     }
 }
 
+function playerPlay() {
+  let selection = prompt('Please choose either Rock, Paper or Scissors');
+  selection = selection.toLowerCase();
+  return selection;
+}
+
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection == 'Rock' && computerSelection == 'Scissors') {
-      return `You win. ${playerSelection} beats ${computerSelection}.`;
-  } else if (playerSelection == 'Paper' && computerSelection == 'Rock') {
-      return `You win. ${playerSelection} beats ${computerSelection}.`;
-  } else if (playerSelection == 'Scissors' && computerSelection == 'Paper') {
-      return `You win. ${playerSelection} beats ${computerSelection}.`;
-  } else if (playerSelection === computerSelection) {
-      return 'Draw.'
+  if (playerSelection == 'rock' && computerSelection == 'scissors') {
+      return 1;
+  } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+      return 1;
+  } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+      return 1;
+  } else if (playerSelection == computerSelection) {
+      return 3;
   } else {
-      return `You lose. ${computerSelection} beats ${playerSelection}`;
+      return 2;
   }
 }
 
-let computerSelection = computerPlay();
-let playerSelection = 'Scissors';
+function game() {
+  let win = 0;
+  let loss = 0;
+  for (let i = 0; i < 5; i++) {
+    let computerSelection = computerPlay();
+    let playerSelection = playerPlay();
+    result = playRound(playerSelection, computerSelection);
+    if (result == 1) {
+      console.log(`You win this round. ${playerSelection} beats ${computerSelection}.`);
+      win++;
+    } else if (result == 2) {
+      console.log(`You lose this round. ${computerSelection} beats ${playerSelection}`);
+      loss++;
+    } else {
+      console.log('Draw.');
+    }
+  }
+  if (win > loss) {
+    console.log(`You win the game ${win} to ${lose}.`);
+  } else if (loss > win) {
+    console.log(`You lose the game ${lose} to ${win}.`)
+  } else {
+    console.log('Its a draw.')
+  }
+    
+}
 
-playRound(playerSelection, computerSelection);
+game();
