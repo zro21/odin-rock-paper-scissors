@@ -1,26 +1,20 @@
 function computerPlay() {
   let random = Math.floor(Math.random() * 3 + 1);
   if (random == 1) {
-      return 'rock';
+      return 'Rock';
     } else if (random == 2) {
-      return 'paper';
+      return 'Paper';
     } else {
-      return 'scissors';
+      return 'Scissors';
     }
 }
 
-function playerPlay() {
-  let selection = prompt('Please choose either Rock, Paper or Scissors');
-  selection = selection.toLowerCase();
-  return selection;
-}
-
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection == 'rock' && computerSelection == 'scissors') {
+  if (playerSelection == 'Rock' && computerSelection == 'Scissors') {
       return 1;
-  } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+  } else if (playerSelection == 'Paper' && computerSelection == 'Rock') {
       return 1;
-  } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+  } else if (playerSelection == 'Scissors' && computerSelection == 'Paper') {
       return 1;
   } else if (playerSelection == computerSelection) {
       return 3;
@@ -30,11 +24,15 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-  let win = 0;
-  let loss = 0;
   for (let i = 0; i < 5; i++) {
     let computerSelection = computerPlay();
-    let playerSelection = playerPlay();
+    let playerSelection;
+    while (true) {
+      playerSelection = prompt('Please choose either Rock, Paper or Scissors').toLowerCase();
+      if (playerSelection == 'rock' || playerSelection == 'paper' || playerSelection == 'scissors') break;
+    }
+    let firstLetter = playerSelection.slice(0, 1);
+    playerSelection = playerSelection.replace(firstLetter, firstLetter.toUpperCase());
     result = playRound(playerSelection, computerSelection);
     if (result == 1) {
       console.log(`You win this round. ${playerSelection} beats ${computerSelection}.`);
@@ -47,13 +45,15 @@ function game() {
     }
   }
   if (win > loss) {
-    console.log(`You win the game ${win} to ${lose}.`);
+    console.log(`You win the game ${win} to ${loss}.`);
   } else if (loss > win) {
-    console.log(`You lose the game ${lose} to ${win}.`)
+    console.log(`You lose the game ${loss} to ${win}.`)
   } else {
     console.log('Its a draw.')
   }
     
 }
 
+let win = 0;
+let loss = 0;
 game();
