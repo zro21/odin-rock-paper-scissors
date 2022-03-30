@@ -23,6 +23,31 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+const buttons = document.querySelectorAll('button');
+for (let button of buttons) {
+  button.addEventListener('click', () => {
+    let computerSelection = computerPlay();
+    let playerSelection;
+    if (button.id === 'btn1') {
+      playerSelection = 'Rock';
+    } else if (button.id === 'btn2') {
+      playerSelection = 'Paper';
+    } else if (button.id === 'btn3') {
+      playerSelection = 'Scissors';
+    }
+    let result = playRound(playerSelection, computerSelection);
+    
+    if (result == 1) {
+      console.log(`You win this round. ${playerSelection} beats ${computerSelection}.`);
+    } else if (result == 2) {
+      console.log(`You lose this round. ${computerSelection} beats ${playerSelection}`);
+    } else {
+      console.log('Draw.');
+    }
+  })
+}
+
+/*
 function game() {
   for (let i = 0; i < 5; i++) {
     let computerSelection = computerPlay();
@@ -57,3 +82,5 @@ function game() {
 let win = 0;
 let loss = 0;
 game();
+*/
+
