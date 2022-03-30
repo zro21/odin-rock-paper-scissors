@@ -1,8 +1,8 @@
 function computerPlay() {
   let random = Math.floor(Math.random() * 3 + 1);
-  if (random == 1) {
+  if (random === 1) {
       return 'Rock';
-    } else if (random == 2) {
+    } else if (random === 2) {
       return 'Paper';
     } else {
       return 'Scissors';
@@ -10,13 +10,13 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection == 'Rock' && computerSelection == 'Scissors') {
+  if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
       return 1;
-  } else if (playerSelection == 'Paper' && computerSelection == 'Rock') {
+  } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
       return 1;
-  } else if (playerSelection == 'Scissors' && computerSelection == 'Paper') {
+  } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
       return 1;
-  } else if (playerSelection == computerSelection) {
+  } else if (playerSelection === computerSelection) {
       return 3;
   } else {
       return 2;
@@ -24,6 +24,8 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const buttons = document.querySelectorAll('button');
+const div = document.querySelector('div');
+
 for (let button of buttons) {
   button.addEventListener('click', () => {
     let computerSelection = computerPlay();
@@ -37,12 +39,12 @@ for (let button of buttons) {
     }
     let result = playRound(playerSelection, computerSelection);
     
-    if (result == 1) {
-      console.log(`You win this round. ${playerSelection} beats ${computerSelection}.`);
-    } else if (result == 2) {
-      console.log(`You lose this round. ${computerSelection} beats ${playerSelection}`);
+    if (result === 1) {
+      div.textContent = `You win this round. ${playerSelection} beats ${computerSelection}.`;
+    } else if (result === 2) {
+      div.textContent = `You lose this round. ${computerSelection} beats ${playerSelection}`;
     } else {
-      console.log('Draw.');
+      div.textContent = 'This round is a Draw.';
     }
   })
 }
